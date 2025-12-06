@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>医院挂号小程序原型</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 手机外框容器 -->
+    <div class="phone-container">
+        <div class="phone-frame">
+            <!-- 状态栏 -->
+            <div class="status-bar">
+                <span class="time">09:41</span>
+                <div class="status-icons">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-full"></i>
+                </div>
+            </div>
+
+            <!-- 页面容器 -->
+            <div class="page-container">
+                <!-- ========== 首页 ========== -->
+                <div class="page active" id="page-home">
+                    <div class="header">
+                        <h1>仁爱医院</h1>
+                        <div class="header-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>上海市浦东新区</span>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <!-- 搜索框 -->
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="搜索科室、医生、疾病">
+                        </div>
+
+                        <!-- Banner轮播 -->
+                        <div class="banner">
+                            <div class="banner-slide active">
+                                <div class="banner-content gradient-blue">
+                                    <div class="banner-text">
+                                        <h3>在线问诊</h3>
+                                        <p>足不出户，专家在线</p>
+                                    </div>
+                                    <i class="fas fa-stethoscope banner-icon"></i>
+                                </div>
+                            </div>
+                            <div class="banner-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+
+                        <!-- 快捷功能入口 -->
+                        <div class="quick-actions">
+                            <div class="action-item" onclick="navigateTo('page-departments')">
+                                <div class="action-icon gradient-green">
+                                    <i class="fas fa-calendar-plus"></i>
+                                </div>
+                                <span>预约挂号</span>
+                            </div>
+                            <div class="action-item" onclick="navigateTo('page-appointments')">
+                                <div class="action-icon gradient-orange">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+                                <span>我的预约</span>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon gradient-purple">
+                                    <i class="fas fa-file-medical"></i>
+                                </div>
+                                <span>报告查询</span>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon gradient-pink">
+                                    <i class="fas fa-comment-medical"></i>
+                                </div>
+                                <span>在线问诊</span>
+                            </div>
+                        </div>
+
+                        <!-- 热门科室 -->
+                        <div class="section">
+                            <div class="section-header">
+                                <h2>热门科室</h2>
+                                <span class="more" onclick="navigateTo('page-departments')">全部 <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                            <div class="department-grid">
+                                <div class="department-item" onclick="selectDepartment('内科')">
+                                    <div class="dept-icon">
+                                        <i class="fas fa-heartbeat"></i>
+                                    </div>
+                                    <span>内科</span>
+                                </div>
+                                <div class="department-item" onclick="selectDepartment('外科')">
+                                    <div class="dept-icon">
+                                        <i class="fas fa-user-md"></i>
+                                    </div>
+                                    <span>外科</span>
+                                </div>
+                                <div class="department-item" onclick="selectDepartment('儿科')">
+                                    <div class="dept-icon">
+                                        <i class="fas fa-baby"></i>
+                                    </div>
+                                    <span>儿科</span>
+                                </div>
+                                <div class="department-item" onclick="selectDepartment('妇科')">
+                                    <div class="dept-icon">
+                                        <i class="fas fa-female"></i>
+                                    </div>
+                                    <span>妇科</span>
+                                </div>
+                                <div class="department-item" onclick="selectDepartment('眼科')">
+                                    <div class="dept-icon">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <span>眼科</span>
+                                </div>
+                                <div class="department-item" onclick="selectDepartment('口腔科')">
+                                    <div class="dept-icon">
+                                        <i class="fas fa-tooth"></i>
+                                    </div>
+                                    <span>口腔科</span>
+                                </div>
+                                <div class="department-item" onclick="selectDepartment('皮肤科')">
+                                    <div class="dept-icon">
+                                        <i class="fas fa-hand-sparkles"></i>
+                                    </div>
+                                    <span>皮肤科</span>
+                                </div>
+                                <div class="department-item" onclick="selectDepartment('中医科')">
+                                    <div class="dept-icon">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                    <span>中医科</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 推荐医生 -->
+                        <div class="section">
+                            <div class="section-header">
+                                <h2>推荐医生</h2>
+                                <span class="more">更多 <i class="fas fa-chevron-right"></i></span>
+                            </div>
+                            <div class="doctor-list">
+                                <div class="doctor-card" onclick="selectDoctor('张医生')">
+                                    <div class="doctor-avatar">
+                                        <i class="fas fa-user-md"></i>
+                                    </div>
+                                    <div class="doctor-info">
+                                        <div class="doctor-name">
+                                            <span>张明华</span>
+                                            <span class="doctor-title">主任医师</span>
+                                        </div>
+                                        <div class="doctor-dept">心血管内科</div>
+                                        <div class="doctor-tags">
+                                            <span class="tag">高血压</span>
+                                            <span class="tag">冠心病</span>
+                                        </div>
+                                    </div>
+                                    <div class="doctor-action">
+                                        <span class="available">可预约</span>
+                                    </div>
+                                </div>
+                                <div class="doctor-card" onclick="selectDoctor('李医生')">
+                                    <div class="doctor-avatar female">
+                                        <i class="fas fa-user-md"></i>
+                                    </div>
+                                    <div class="doctor-info">
+                                        <div class="doctor-name">
+                                            <span>李婷婷</span>
+                                            <span class="doctor-title">副主任医师</span>
+                                        </div>
+                                        <div class="doctor-dept">妇科</div>
+                                        <div class="doctor-tags">
+                                            <span class="tag">妇科炎症</span>
+                                            <span class="tag">产前检查</span>
+                                        </div>
+                                    </div>
+                                    <div class="doctor-action">
+                                        <span class="available">可预约</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 公告通知 -->
+                        <div class="notice-bar">
+                            <i class="fas fa-bullhorn"></i>
+                            <div class="notice-content">
+                                <span>温馨提示：请提前30分钟到达医院完成签到</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== 科室选择页 ========== -->
+                <div class="page" id="page-departments">
+                    <div class="header with-back">
+                        <div class="back-btn" onclick="goBack()">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <h1>选择科室</h1>
+                        <div class="placeholder"></div>
+                    </div>
+
+                    <div class="content">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="搜索科室">
+                        </div>
+
+                        <div class="department-tabs">
+                            <div class="dept-sidebar">
+                                <div class="dept-tab active" data-category="common">常用科室</div>
+                                <div class="dept-tab" data-category="internal">内科系统</div>
+                                <div class="dept-tab" data-category="surgery">外科系统</div>
+                                <div class="dept-tab" data-category="special">专科门诊</div>
+                                <div class="dept-tab" data-category="tcm">中医科室</div>
+                                <div class="dept-tab" data-category="checkup">体检中心</div>
+                            </div>
+                            <div class="dept-content">
+                                <div class="dept-category active" id="dept-common">
+                                    <div class="dept-list-item" onclick="selectDepartment('心血管内科')">
+                                        <i class="fas fa-heartbeat"></i>
+                                        <span>心血管内科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="dept-list-item" onclick="selectDepartment('呼吸内科')">
+                                        <i class="fas fa-lungs"></i>
+                                        <span>呼吸内科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="dept-list-item" onclick="selectDepartment('消化内科')">
+                                        <i class="fas fa-stomach"></i>
+                                        <span>消化内科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="dept-list-item" onclick="selectDepartment('骨科')">
+                                        <i class="fas fa-bone"></i>
+                                        <span>骨科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="dept-list-item" onclick="selectDepartment('神经内科')">
+                                        <i class="fas fa-brain"></i>
+                                        <span>神经内科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="dept-list-item" onclick="selectDepartment('儿科')">
+                                        <i class="fas fa-baby"></i>
+                                        <span>儿科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="dept-list-item" onclick="selectDepartment('妇科')">
+                                        <i class="fas fa-female"></i>
+                                        <span>妇科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="dept-list-item" onclick="selectDepartment('皮肤科')">
+                                        <i class="fas fa-allergies"></i>
+                                        <span>皮肤科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="dept-list-item" onclick="selectDepartment('眼科')">
+                                        <i class="fas fa-eye"></i>
+                                        <span>眼科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="dept-list-item" onclick="selectDepartment('口腔科')">
+                                        <i class="fas fa-tooth"></i>
+                                        <span>口腔科</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== 医生列表页 ========== -->
+                <div class="page" id="page-doctors">
+                    <div class="header with-back">
+                        <div class="back-btn" onclick="goBack()">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <h1 id="doctor-list-title">心血管内科</h1>
+                        <div class="placeholder"></div>
+                    </div>
+
+                    <div class="content">
+                        <!-- 筛选栏 -->
+                        <div class="filter-bar">
+                            <div class="filter-item active">
+                                <span>综合排序</span>
+                                <i class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="filter-item">
+                                <span>职称</span>
+                                <i class="fas fa-caret-down"></i>
+                            </div>
+                            <div class="filter-item">
+                                <span>日期</span>
+                                <i class="fas fa-caret-down"></i>
+                            </div>
+                        </div>
+
+                        <!-- 医生列表 -->
+                        <div class="doctor-full-list">
+                            <div class="doctor-detail-card" onclick="selectDoctor('张明华')">
+                                <div class="doctor-avatar large">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="doctor-detail-info">
+                                    <div class="doctor-header">
+                                        <span class="name">张明华</span>
+                                        <span class="title">主任医师</span>
+                                        <span class="badge expert">专家</span>
+                                    </div>
+                                    <div class="doctor-dept">心血管内科 | 30年经验</div>
+                                    <div class="doctor-specialty">
+                                        擅长：高血压、冠心病、心律失常、心力衰竭的诊断与治疗
+                                    </div>
+                                    <div class="doctor-schedule">
+                                        <span class="schedule-tag available">明天上午</span>
+                                        <span class="schedule-tag available">明天下午</span>
+                                        <span class="schedule-tag">周三上午</span>
+                                    </div>
+                                </div>
+                                <div class="doctor-fee">
+                                    <span class="fee-label">挂号费</span>
+                                    <span class="fee-price">¥50</span>
+                                </div>
+                            </div>
+
+                            <div class="doctor-detail-card" onclick="selectDoctor('王建国')">
+                                <div class="doctor-avatar large">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="doctor-detail-info">
+                                    <div class="doctor-header">
+                                        <span class="name">王建国</span>
+                                        <span class="title">副主任医师</span>
+                                    </div>
+                                    <div class="doctor-dept">心血管内科 | 18年经验</div>
+                                    <div class="doctor-specialty">
+                                        擅长：心肌梗死、动脉硬化、高血脂的综合治疗
+                                    </div>
+                                    <div class="doctor-schedule">
+                                        <span class="schedule-tag available">今天下午</span>
+                                        <span class="schedule-tag available">周二上午</span>
+                                    </div>
+                                </div>
+                                <div class="doctor-fee">
+                                    <span class="fee-label">挂号费</span>
+                                    <span class="fee-price">¥30</span>
+                                </div>
+                            </div>
+
+                            <div class="doctor-detail-card" onclick="selectDoctor('刘芳')">
+                                <div class="doctor-avatar large female">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="doctor-detail-info">
+                                    <div class="doctor-header">
+                                        <span class="name">刘芳</span>
+                                        <span class="title">主治医师</span>
+                                    </div>
+                                    <div class="doctor-dept">心血管内科 | 10年经验</div>
+                                    <div class="doctor-specialty">
+                                        擅长：先天性心脏病、心脏瓣膜病、心肌病的诊疗
+                                    </div>
+                                    <div class="doctor-schedule">
+                                        <span class="schedule-tag available">周一全天</span>
+                                        <span class="schedule-tag">周四上午</span>
+                                    </div>
+                                </div>
+                                <div class="doctor-fee">
+                                    <span class="fee-label">挂号费</span>
+                                    <span class="fee-price">¥20</span>
+                                </div>
+                            </div>
+
+                            <div class="doctor-detail-card" onclick="selectDoctor('陈伟')">
+                                <div class="doctor-avatar large">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="doctor-detail-info">
+                                    <div class="doctor-header">
+                                        <span class="name">陈伟</span>
+                                        <span class="title">主任医师</span>
+                                        <span class="badge expert">专家</span>
+                                    </div>
+                                    <div class="doctor-dept">心血管内科 | 25年经验</div>
+                                    <div class="doctor-specialty">
+                                        擅长：复杂冠心病介入治疗、心脏起搏器植入术
+                                    </div>
+                                    <div class="doctor-schedule">
+                                        <span class="schedule-tag full">号源已满</span>
+                                    </div>
+                                </div>
+                                <div class="doctor-fee">
+                                    <span class="fee-label">挂号费</span>
+                                    <span class="fee-price">¥80</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== 时间选择页 ========== -->
+                <div class="page" id="page-schedule">
+                    <div class="header with-back">
+                        <div class="back-btn" onclick="goBack()">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <h1>选择时间</h1>
+                        <div class="placeholder"></div>
+                    </div>
+
+                    <div class="content">
+                        <!-- 医生信息卡 -->
+                        <div class="selected-doctor-card">
+                            <div class="doctor-avatar">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="doctor-brief">
+                                <div class="doctor-name">
+                                    <span id="selected-doctor-name">张明华</span>
+                                    <span class="doctor-title">主任医师</span>
+                                </div>
+                                <div class="doctor-dept">心血管内科</div>
+                            </div>
+                        </div>
+
+                        <!-- 日期选择 -->
+                        <div class="date-selector">
+                            <div class="date-header">
+                                <span>选择就诊日期</span>
+                            </div>
+                            <div class="date-scroll">
+                                <div class="date-item" onclick="selectDate(this)">
+                                    <span class="weekday">今天</span>
+                                    <span class="date">12/06</span>
+                                    <span class="status available">有号</span>
+                                </div>
+                                <div class="date-item active" onclick="selectDate(this)">
+                                    <span class="weekday">明天</span>
+                                    <span class="date">12/07</span>
+                                    <span class="status available">有号</span>
+                                </div>
+                                <div class="date-item" onclick="selectDate(this)">
+                                    <span class="weekday">周一</span>
+                                    <span class="date">12/08</span>
+                                    <span class="status available">有号</span>
+                                </div>
+                                <div class="date-item" onclick="selectDate(this)">
+                                    <span class="weekday">周二</span>
+                                    <span class="date">12/09</span>
+                                    <span class="status full">已满</span>
+                                </div>
+                                <div class="date-item" onclick="selectDate(this)">
+                                    <span class="weekday">周三</span>
+                                    <span class="date">12/10</span>
+                                    <span class="status available">有号</span>
+                                </div>
+                                <div class="date-item" onclick="selectDate(this)">
+                                    <span class="weekday">周四</span>
+                                    <span class="date">12/11</span>
+                                    <span class="status available">有号</span>
+                                </div>
+                                <div class="date-item" onclick="selectDate(this)">
+                                    <span class="weekday">周五</span>
+                                    <span class="date">12/12</span>
+                                    <span class="status rest">休息</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 时间段选择 -->
+                        <div class="time-selector">
+                            <div class="time-section">
+                                <div class="time-header">
+                                    <i class="fas fa-sun"></i>
+                                    <span>上午</span>
+                                </div>
+                                <div class="time-slots">
+                                    <div class="time-slot" onclick="selectTime(this)">
+                                        <span class="time">08:00-08:30</span>
+                                        <span class="remain">剩余 5</span>
+                                    </div>
+                                    <div class="time-slot" onclick="selectTime(this)">
+                                        <span class="time">08:30-09:00</span>
+                                        <span class="remain">剩余 3</span>
+                                    </div>
+                                    <div class="time-slot active" onclick="selectTime(this)">
+                                        <span class="time">09:00-09:30</span>
+                                        <span class="remain">剩余 8</span>
+                                    </div>
+                                    <div class="time-slot" onclick="selectTime(this)">
+                                        <span class="time">09:30-10:00</span>
+                                        <span class="remain">剩余 2</span>
+                                    </div>
+                                    <div class="time-slot full">
+                                        <span class="time">10:00-10:30</span>
+                                        <span class="remain">已满</span>
+                                    </div>
+                                    <div class="time-slot" onclick="selectTime(this)">
+                                        <span class="time">10:30-11:00</span>
+                                        <span class="remain">剩余 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="time-section">
+                                <div class="time-header">
+                                    <i class="fas fa-cloud-sun"></i>
+                                    <span>下午</span>
+                                </div>
+                                <div class="time-slots">
+                                    <div class="time-slot" onclick="selectTime(this)">
+                                        <span class="time">14:00-14:30</span>
+                                        <span class="remain">剩余 10</span>
+                                    </div>
+                                    <div class="time-slot" onclick="selectTime(this)">
+                                        <span class="time">14:30-15:00</span>
+                                        <span class="remain">剩余 7</span>
+                                    </div>
+                                    <div class="time-slot" onclick="selectTime(this)">
+                                        <span class="time">15:00-15:30</span>
+                                        <span class="remain">剩余 4</span>
+                                    </div>
+                                    <div class="time-slot" onclick="selectTime(this)">
+                                        <span class="time">15:30-16:00</span>
+                                        <span class="remain">剩余 9</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 底部按钮 -->
+                    <div class="bottom-action">
+                        <div class="fee-info">
+                            <span>挂号费：</span>
+                            <span class="price">¥50.00</span>
+                        </div>
+                        <button class="btn-primary" onclick="navigateTo('page-confirm')">确认预约</button>
+                    </div>
+                </div>
+
+                <!-- ========== 预约确认页 ========== -->
+                <div class="page" id="page-confirm">
+                    <div class="header with-back">
+                        <div class="back-btn" onclick="goBack()">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <h1>确认预约</h1>
+                        <div class="placeholder"></div>
+                    </div>
+
+                    <div class="content">
+                        <!-- 预约信息 -->
+                        <div class="confirm-section">
+                            <div class="section-title">就诊信息</div>
+                            <div class="info-card">
+                                <div class="info-row">
+                                    <span class="label">就诊医院</span>
+                                    <span class="value">仁爱医院</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">就诊科室</span>
+                                    <span class="value">心血管内科</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">就诊医生</span>
+                                    <span class="value">张明华 主任医师</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">就诊时间</span>
+                                    <span class="value highlight">2024-12-07 09:00-09:30</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="label">挂号费用</span>
+                                    <span class="value price">¥50.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 就诊人信息 -->
+                        <div class="confirm-section">
+                            <div class="section-title">就诊人信息</div>
+                            <div class="patient-selector">
+                                <div class="patient-card active">
+                                    <div class="patient-info">
+                                        <span class="patient-name">张三</span>
+                                        <span class="patient-tag">本人</span>
+                                    </div>
+                                    <div class="patient-detail">
+                                        <span>身份证：310***********1234</span>
+                                    </div>
+                                    <div class="check-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                </div>
+                                <div class="patient-card">
+                                    <div class="patient-info">
+                                        <span class="patient-name">李四</span>
+                                        <span class="patient-tag">家属</span>
+                                    </div>
+                                    <div class="patient-detail">
+                                        <span>身份证：310***********5678</span>
+                                    </div>
+                                    <div class="check-icon">
+                                        <i class="far fa-circle"></i>
+                                    </div>
+                                </div>
+                                <div class="add-patient">
+                                    <i class="fas fa-plus"></i>
+                                    <span>添加就诊人</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 病情描述 -->
+                        <div class="confirm-section">
+                            <div class="section-title">病情描述 <span class="optional">(选填)</span></div>
+                            <textarea class="symptom-input" placeholder="请简要描述您的症状，以便医生提前了解病情..."></textarea>
+                        </div>
+
+                        <!-- 注意事项 -->
+                        <div class="notice-section">
+                            <div class="notice-title">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>温馨提示</span>
+                            </div>
+                            <ul class="notice-list">
+                                <li>请提前30分钟到达医院完成签到</li>
+                                <li>就诊当天请携带本人有效身份证件</li>
+                                <li>预约成功后，如需取消请提前24小时</li>
+                            </ul>
+                        </div>
+
+                        <!-- 协议 -->
+                        <div class="agreement">
+                            <div class="checkbox checked">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>我已阅读并同意<a href="#">《预约挂号服务协议》</a></span>
+                        </div>
+                    </div>
+
+                    <!-- 底部支付 -->
+                    <div class="bottom-action">
+                        <div class="total-fee">
+                            <span>合计：</span>
+                            <span class="total-price">¥50.00</span>
+                        </div>
+                        <button class="btn-primary" onclick="submitAppointment()">立即支付</button>
+                    </div>
+                </div>
+
+                <!-- ========== 预约成功页 ========== -->
+                <div class="page" id="page-success">
+                    <div class="header with-back">
+                        <div class="back-btn" onclick="navigateTo('page-home')">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <h1>预约结果</h1>
+                        <div class="placeholder"></div>
+                    </div>
+
+                    <div class="content success-content">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2>预约成功</h2>
+                        <p class="success-msg">您的预约已成功，请按时就诊</p>
+
+                        <div class="success-info-card">
+                            <div class="qr-code">
+                                <div class="qr-placeholder">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <span>就诊二维码</span>
+                            </div>
+                            <div class="appointment-detail">
+                                <div class="detail-row">
+                                    <span class="label">就诊科室</span>
+                                    <span class="value">心血管内科</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">就诊医生</span>
+                                    <span class="value">张明华</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">就诊时间</span>
+                                    <span class="value">12月07日 09:00</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">候诊序号</span>
+                                    <span class="value highlight">A023</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="success-tips">
+                            <h4><i class="fas fa-info-circle"></i> 就诊指南</h4>
+                            <ol>
+                                <li>请提前30分钟到达医院</li>
+                                <li>在自助机或窗口完成签到</li>
+                                <li>前往候诊区等待叫号</li>
+                            </ol>
+                        </div>
+
+                        <div class="success-actions">
+                            <button class="btn-outline" onclick="navigateTo('page-appointments')">查看预约</button>
+                            <button class="btn-primary" onclick="navigateTo('page-home')">返回首页</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== 我的预约页 ========== -->
+                <div class="page" id="page-appointments">
+                    <div class="header">
+                        <h1>我的预约</h1>
+                    </div>
+
+                    <div class="content">
+                        <!-- 预约状态标签 -->
+                        <div class="appointment-tabs">
+                            <div class="tab active">全部</div>
+                            <div class="tab">待就诊</div>
+                            <div class="tab">已完成</div>
+                            <div class="tab">已取消</div>
+                        </div>
+
+                        <!-- 预约列表 -->
+                        <div class="appointment-list">
+                            <div class="appointment-card">
+                                <div class="appointment-status pending">待就诊</div>
+                                <div class="appointment-header">
+                                    <span class="hospital">仁爱医院</span>
+                                    <span class="date">2024-12-07</span>
+                                </div>
+                                <div class="appointment-body">
+                                    <div class="doctor-avatar small">
+                                        <i class="fas fa-user-md"></i>
+                                    </div>
+                                    <div class="appointment-info">
+                                        <div class="info-main">
+                                            <span class="doctor-name">张明华</span>
+                                            <span class="dept">心血管内科</span>
+                                        </div>
+                                        <div class="info-time">
+                                            <i class="far fa-clock"></i>
+                                            <span>09:00-09:30 | 序号：A023</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn-cancel">取消预约</button>
+                                    <button class="btn-detail">查看详情</button>
+                                </div>
+                            </div>
+
+                            <div class="appointment-card">
+                                <div class="appointment-status completed">已完成</div>
+                                <div class="appointment-header">
+                                    <span class="hospital">仁爱医院</span>
+                                    <span class="date">2024-12-01</span>
+                                </div>
+                                <div class="appointment-body">
+                                    <div class="doctor-avatar small female">
+                                        <i class="fas fa-user-md"></i>
+                                    </div>
+                                    <div class="appointment-info">
+                                        <div class="info-main">
+                                            <span class="doctor-name">李婷婷</span>
+                                            <span class="dept">妇科</span>
+                                        </div>
+                                        <div class="info-time">
+                                            <i class="far fa-clock"></i>
+                                            <span>14:00-14:30 | 序号：B015</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn-review">评价医生</button>
+                                    <button class="btn-rebook">再次预约</button>
+                                </div>
+                            </div>
+
+                            <div class="appointment-card">
+                                <div class="appointment-status cancelled">已取消</div>
+                                <div class="appointment-header">
+                                    <span class="hospital">仁爱医院</span>
+                                    <span class="date">2024-11-28</span>
+                                </div>
+                                <div class="appointment-body">
+                                    <div class="doctor-avatar small">
+                                        <i class="fas fa-user-md"></i>
+                                    </div>
+                                    <div class="appointment-info">
+                                        <div class="info-main">
+                                            <span class="doctor-name">王建国</span>
+                                            <span class="dept">心血管内科</span>
+                                        </div>
+                                        <div class="info-time">
+                                            <i class="far fa-clock"></i>
+                                            <span>10:00-10:30</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn-rebook">再次预约</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== 个人中心页 ========== -->
+                <div class="page" id="page-profile">
+                    <div class="header">
+                        <h1>个人中心</h1>
+                    </div>
+
+                    <div class="content">
+                        <!-- 用户信息 -->
+                        <div class="user-card">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="user-info">
+                                <span class="user-name">张三</span>
+                                <span class="user-phone">138****8888</span>
+                            </div>
+                            <div class="user-action">
+                                <i class="fas fa-qrcode"></i>
+                            </div>
+                        </div>
+
+                        <!-- 快捷入口 -->
+                        <div class="profile-shortcuts">
+                            <div class="shortcut-item" onclick="navigateTo('page-appointments')">
+                                <span class="shortcut-num">1</span>
+                                <span class="shortcut-label">待就诊</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-num">3</span>
+                                <span class="shortcut-label">已完成</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-num">2</span>
+                                <span class="shortcut-label">收藏医生</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-num">0</span>
+                                <span class="shortcut-label">待评价</span>
+                            </div>
+                        </div>
+
+                        <!-- 功能列表 -->
+                        <div class="menu-list">
+                            <div class="menu-item">
+                                <div class="menu-icon"><i class="fas fa-users"></i></div>
+                                <span class="menu-label">就诊人管理</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon"><i class="fas fa-file-medical-alt"></i></div>
+                                <span class="menu-label">就诊记录</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon"><i class="fas fa-file-invoice"></i></div>
+                                <span class="menu-label">电子发票</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon"><i class="fas fa-credit-card"></i></div>
+                                <span class="menu-label">医保绑定</span>
+                                <span class="menu-badge">未绑定</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon"><i class="fas fa-map-marked-alt"></i></div>
+                                <span class="menu-label">就诊指南</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon"><i class="fas fa-headset"></i></div>
+                                <span class="menu-label">客服中心</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon"><i class="fas fa-cog"></i></div>
+                                <span class="menu-label">设置</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+
+                        <!-- 版本信息 -->
+                        <div class="version-info">
+                            <span>版本 1.0.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部导航栏 -->
+            <div class="tab-bar">
+                <div class="tab-item active" onclick="switchTab('page-home')">
+                    <i class="fas fa-home"></i>
+                    <span>首页</span>
+                </div>
+                <div class="tab-item" onclick="switchTab('page-departments')">
+                    <i class="fas fa-calendar-plus"></i>
+                    <span>预约</span>
+                </div>
+                <div class="tab-item" onclick="switchTab('page-appointments')">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>我的预约</span>
+                </div>
+                <div class="tab-item" onclick="switchTab('page-profile')">
+                    <i class="fas fa-user"></i>
+                    <span>我的</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

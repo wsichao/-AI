@@ -1,0 +1,888 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: #2ECC71;
+    --danger-color: #E74C3C;
+    --warning-color: #F39C12;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --text-light: #999;
+    --bg-light: #F5F7FA;
+    --border-color: #E0E0E0;
+    --white: #FFFFFF;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 页面容器 */
+.page {
+    display: none;
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* 头部 */
+.header {
+    background: linear-gradient(135deg, var(--primary-color), #357ABD);
+    color: var(--white);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: var(--shadow);
+}
+
+.header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    flex: 1;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.back-button:hover {
+    opacity: 0.8;
+}
+
+/* 搜索栏 */
+.search-bar {
+    margin: 15px;
+    background: var(--white);
+    padding: 12px 15px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow);
+}
+
+.search-bar svg {
+    color: var(--text-light);
+    flex-shrink: 0;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 15px;
+    color: var(--text-primary);
+}
+
+.search-bar input::placeholder {
+    color: var(--text-light);
+}
+
+/* 横幅 */
+.banner {
+    margin: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.banner img {
+    width: 100%;
+    display: block;
+}
+
+/* 区域 */
+.section {
+    margin: 20px 15px;
+}
+
+.section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+/* 科室网格 */
+.department-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.department-card {
+    background: var(--white);
+    padding: 15px 10px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
+}
+
+.department-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.department-card .icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: all 0.3s;
+}
+
+.icon-internal { background: linear-gradient(135deg, #4A90E2, #357ABD); }
+.icon-surgery { background: linear-gradient(135deg, #E74C3C, #C0392B); }
+.icon-pediatrics { background: linear-gradient(135deg, #F39C12, #E67E22); }
+.icon-gynecology { background: linear-gradient(135deg, #E91E63, #C2185B); }
+.icon-orthopedics { background: linear-gradient(135deg, #9C27B0, #7B1FA2); }
+.icon-ophthalmology { background: linear-gradient(135deg, #2ECC71, #27AE60); }
+.icon-dental { background: linear-gradient(135deg, #3498DB, #2980B9); }
+.icon-dermatology { background: linear-gradient(135deg, #1ABC9C, #16A085); }
+
+.department-card span {
+    font-size: 13px;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+/* 快速链接 */
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.quick-link {
+    background: var(--white);
+    padding: 20px 10px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
+}
+
+.quick-link:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.quick-icon {
+    font-size: 32px;
+}
+
+.quick-link span {
+    font-size: 13px;
+    color: var(--text-primary);
+}
+
+/* 底部导航 */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: var(--primary-color);
+}
+
+.nav-item span {
+    font-size: 12px;
+}
+
+/* 过滤栏 */
+.filter-bar {
+    padding: 15px;
+    background: var(--white);
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    background: var(--white);
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 14px;
+    color: var(--text-secondary);
+    transition: all 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+/* 医生列表 */
+.doctor-list {
+    padding: 15px;
+}
+
+.doctor-card {
+    background: var(--white);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
+}
+
+.doctor-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.doctor-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.doctor-info {
+    flex: 1;
+}
+
+.doctor-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.doctor-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.doctor-title {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.doctor-specialty {
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.doctor-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.rating {
+    color: var(--warning-color);
+}
+
+.appointment-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--danger-color);
+}
+
+/* 按钮 */
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background: #357ABD;
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-outline {
+    background: var(--white);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.btn-outline:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* 医生摘要 */
+.doctor-summary {
+    background: var(--white);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.small-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.doctor-summary h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.doctor-summary p {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* 日期选择器 */
+.date-selector {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 5px 0;
+}
+
+.date-btn {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    min-width: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s;
+}
+
+.date-btn:hover,
+.date-btn.active {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.date-btn.active .date-badge {
+    background: var(--white);
+    color: var(--primary-color);
+}
+
+.date-day {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.date-date {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.date-badge {
+    background: var(--secondary-color);
+    color: var(--white);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+}
+
+/* 时间槽 */
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.time-slot {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.time-slot:hover:not(.disabled) {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.time-slot.active {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.time-slot.disabled {
+    background: var(--bg-light);
+    color: var(--text-light);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.sold-out {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: var(--danger-color);
+    color: var(--white);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+/* 固定底部 */
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 15px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.appointment-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.summary-label {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.summary-price {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--danger-color);
+}
+
+.btn-confirm {
+    width: 100%;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-confirm:hover {
+    background: #357ABD;
+    transform: scale(1.02);
+}
+
+/* 确认页面 */
+.confirmation-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    margin-top: 20px;
+    animation: scaleIn 0.5s;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.confirmation-content h2 {
+    font-size: 24px;
+    color: var(--text-primary);
+}
+
+.success-message {
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.appointment-details {
+    width: 100%;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.detail-value {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: right;
+}
+
+.detail-value.highlight {
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.qr-code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.qr-code img {
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.qr-code p {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.action-buttons button {
+    flex: 1;
+}
+
+/* 标签页 */
+.tabs {
+    display: flex;
+    background: var(--white);
+    padding: 0 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 15px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.tab:hover,
+.tab.active {
+    color: var(--primary-color);
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px 3px 0 0;
+}
+
+/* 预约列表 */
+.appointments-list {
+    padding: 15px;
+}
+
+.appointment-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.appointment-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-upcoming {
+    background: #FFF3E0;
+    color: var(--warning-color);
+}
+
+.status-completed {
+    background: #E8F5E9;
+    color: var(--secondary-color);
+}
+
+.status-cancelled {
+    background: #FFEBEE;
+    color: var(--danger-color);
+}
+
+.appointment-main {
+    padding-top: 10px;
+}
+
+.appointment-doctor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.appointment-doctor h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.appointment-doctor p {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.appointment-time {
+    background: var(--bg-light);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.time-info,
+.location-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.location-info:last-child {
+    margin-bottom: 0;
+}
+
+.time-info svg,
+.location-info svg {
+    flex-shrink: 0;
+}
+
+.appointment-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.appointment-actions button {
+    flex: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .department-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .department-card {
+        padding: 12px 8px;
+    }
+
+    .department-card .icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .department-card span {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 768px) {
+    .page {
+        max-width: 480px;
+        margin: 0 auto;
+        box-shadow: var(--shadow-lg);
+    }
+
+    body {
+        background: #E0E0E0;
+    }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-light);
+}

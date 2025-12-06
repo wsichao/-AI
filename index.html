@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医院挂号小程序 - 原型</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 首页 -->
+    <div id="home-page" class="page active">
+        <header class="app-header">
+            <h1>🏥 智慧医院</h1>
+            <p class="subtitle">便捷挂号，健康守护</p>
+        </header>
+        
+        <div class="container">
+            <div class="quick-actions">
+                <div class="action-card" onclick="showPage('department-page')">
+                    <div class="icon">🏥</div>
+                    <h3>预约挂号</h3>
+                    <p>选择科室和医生</p>
+                </div>
+                <div class="action-card" onclick="showPage('appointments-page')">
+                    <div class="icon">📋</div>
+                    <h3>我的预约</h3>
+                    <p>查看挂号记录</p>
+                </div>
+                <div class="action-card">
+                    <div class="icon">👤</div>
+                    <h3>个人中心</h3>
+                    <p>个人信息管理</p>
+                </div>
+                <div class="action-card">
+                    <div class="icon">📞</div>
+                    <h3>联系我们</h3>
+                    <p>医院信息</p>
+                </div>
+            </div>
+
+            <div class="banner">
+                <h2>今日可预约</h2>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="number">156</span>
+                        <span class="label">可预约号源</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number">23</span>
+                        <span class="label">科室开放</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popular-departments">
+                <h3>热门科室</h3>
+                <div class="dept-list">
+                    <div class="dept-item" onclick="selectDepartment('内科', 'department-page')">
+                        <span class="dept-icon">❤️</span>
+                        <span class="dept-name">内科</span>
+                        <span class="dept-arrow">›</span>
+                    </div>
+                    <div class="dept-item" onclick="selectDepartment('外科', 'department-page')">
+                        <span class="dept-icon">🔪</span>
+                        <span class="dept-name">外科</span>
+                        <span class="dept-arrow">›</span>
+                    </div>
+                    <div class="dept-item" onclick="selectDepartment('儿科', 'department-page')">
+                        <span class="dept-icon">👶</span>
+                        <span class="dept-name">儿科</span>
+                        <span class="dept-arrow">›</span>
+                    </div>
+                    <div class="dept-item" onclick="selectDepartment('妇科', 'department-page')">
+                        <span class="dept-icon">👩</span>
+                        <span class="dept-name">妇科</span>
+                        <span class="dept-arrow">›</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 科室选择页面 -->
+    <div id="department-page" class="page">
+        <header class="page-header">
+            <button class="back-btn" onclick="showPage('home-page')">‹ 返回</button>
+            <h2>选择科室</h2>
+        </header>
+        
+        <div class="container">
+            <div class="search-box">
+                <input type="text" placeholder="搜索科室..." id="dept-search">
+            </div>
+
+            <div class="department-list" id="department-list">
+                <div class="dept-card" onclick="selectDepartment('内科', 'doctor-page')">
+                    <div class="dept-info">
+                        <span class="dept-icon-large">❤️</span>
+                        <div>
+                            <h3>内科</h3>
+                            <p>心血管、消化、呼吸等</p>
+                            <span class="available">今日可预约 45 个号源</span>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+
+                <div class="dept-card" onclick="selectDepartment('外科', 'doctor-page')">
+                    <div class="dept-info">
+                        <span class="dept-icon-large">🔪</span>
+                        <div>
+                            <h3>外科</h3>
+                            <p>普外、骨科、神经外科等</p>
+                            <span class="available">今日可预约 32 个号源</span>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+
+                <div class="dept-card" onclick="selectDepartment('儿科', 'doctor-page')">
+                    <div class="dept-info">
+                        <span class="dept-icon-large">👶</span>
+                        <div>
+                            <h3>儿科</h3>
+                            <p>儿童常见病、生长发育</p>
+                            <span class="available">今日可预约 28 个号源</span>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+
+                <div class="dept-card" onclick="selectDepartment('妇科', 'doctor-page')">
+                    <div class="dept-info">
+                        <span class="dept-icon-large">👩</span>
+                        <div>
+                            <h3>妇科</h3>
+                            <p>妇科常见病、产前检查</p>
+                            <span class="available">今日可预约 35 个号源</span>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+
+                <div class="dept-card" onclick="selectDepartment('骨科', 'doctor-page')">
+                    <div class="dept-info">
+                        <span class="dept-icon-large">🦴</span>
+                        <div>
+                            <h3>骨科</h3>
+                            <p>骨折、关节、脊柱疾病</p>
+                            <span class="available">今日可预约 18 个号源</span>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+
+                <div class="dept-card" onclick="selectDepartment('眼科', 'doctor-page')">
+                    <div class="dept-info">
+                        <span class="dept-icon-large">👁️</span>
+                        <div>
+                            <h3>眼科</h3>
+                            <p>视力检查、眼部疾病</p>
+                            <span class="available">今日可预约 22 个号源</span>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 医生选择页面 -->
+    <div id="doctor-page" class="page">
+        <header class="page-header">
+            <button class="back-btn" onclick="showPage('department-page')">‹ 返回</button>
+            <h2 id="current-dept">选择医生</h2>
+        </header>
+        
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="tab active" onclick="filterDoctors('all')">全部</button>
+                <button class="tab" onclick="filterDoctors('today')">今日可约</button>
+                <button class="tab" onclick="filterDoctors('expert')">专家</button>
+            </div>
+
+            <div class="doctor-list" id="doctor-list">
+                <div class="doctor-card" onclick="selectDoctor('张医生', 'time-page')">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>张医生 <span class="title">主任医师</span></h3>
+                        <p class="specialty">擅长：心血管疾病、高血压</p>
+                        <div class="doctor-meta">
+                            <span class="rating">⭐ 4.9</span>
+                            <span class="experience">从业20年</span>
+                        </div>
+                        <div class="available-slots">
+                            <span class="slot-badge">今日可约 8 个号</span>
+                            <span class="price">¥50</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card" onclick="selectDoctor('李医生', 'time-page')">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>李医生 <span class="title">副主任医师</span></h3>
+                        <p class="specialty">擅长：消化系统疾病</p>
+                        <div class="doctor-meta">
+                            <span class="rating">⭐ 4.8</span>
+                            <span class="experience">从业15年</span>
+                        </div>
+                        <div class="available-slots">
+                            <span class="slot-badge">今日可约 12 个号</span>
+                            <span class="price">¥40</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card" onclick="selectDoctor('王医生', 'time-page')">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>王医生 <span class="title">主治医师</span></h3>
+                        <p class="specialty">擅长：呼吸系统疾病</p>
+                        <div class="doctor-meta">
+                            <span class="rating">⭐ 4.7</span>
+                            <span class="experience">从业10年</span>
+                        </div>
+                        <div class="available-slots">
+                            <span class="slot-badge">今日可约 15 个号</span>
+                            <span class="price">¥30</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card" onclick="selectDoctor('赵医生', 'time-page')">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>赵医生 <span class="title">主任医师</span></h3>
+                        <p class="specialty">擅长：内分泌疾病</p>
+                        <div class="doctor-meta">
+                            <span class="rating">⭐ 5.0</span>
+                            <span class="experience">从业25年</span>
+                        </div>
+                        <div class="available-slots">
+                            <span class="slot-badge">今日可约 5 个号</span>
+                            <span class="price">¥60</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 时间选择页面 -->
+    <div id="time-page" class="page">
+        <header class="page-header">
+            <button class="back-btn" onclick="showPage('doctor-page')">‹ 返回</button>
+            <h2>选择就诊时间</h2>
+        </header>
+        
+        <div class="container">
+            <div class="appointment-summary">
+                <div class="summary-item">
+                    <span class="label">科室：</span>
+                    <span class="value" id="summary-dept">内科</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">医生：</span>
+                    <span class="value" id="summary-doctor">张医生</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">费用：</span>
+                    <span class="value price">¥50</span>
+                </div>
+            </div>
+
+            <div class="date-selector">
+                <h3>选择日期</h3>
+                <div class="date-list">
+                    <div class="date-item active" onclick="selectDate('今天', this)">
+                        <div class="date-day">今天</div>
+                        <div class="date-date">12月15日</div>
+                        <div class="date-weekday">周一</div>
+                    </div>
+                    <div class="date-item" onclick="selectDate('明天', this)">
+                        <div class="date-day">明天</div>
+                        <div class="date-date">12月16日</div>
+                        <div class="date-weekday">周二</div>
+                    </div>
+                    <div class="date-item" onclick="selectDate('后天', this)">
+                        <div class="date-day">后天</div>
+                        <div class="date-date">12月17日</div>
+                        <div class="date-weekday">周三</div>
+                    </div>
+                    <div class="date-item" onclick="selectDate('12月18日', this)">
+                        <div class="date-day">12月18日</div>
+                        <div class="date-date">周四</div>
+                        <div class="date-weekday">周四</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="time-slots">
+                <h3>选择时间段</h3>
+                <div class="time-list" id="time-list">
+                    <div class="time-slot available" onclick="selectTime('08:00-08:30', this)">
+                        <span>08:00-08:30</span>
+                        <span class="slot-status">可预约</span>
+                    </div>
+                    <div class="time-slot available" onclick="selectTime('08:30-09:00', this)">
+                        <span>08:30-09:00</span>
+                        <span class="slot-status">可预约</span>
+                    </div>
+                    <div class="time-slot available" onclick="selectTime('09:00-09:30', this)">
+                        <span>09:00-09:30</span>
+                        <span class="slot-status">可预约</span>
+                    </div>
+                    <div class="time-slot unavailable">
+                        <span>09:30-10:00</span>
+                        <span class="slot-status">已满</span>
+                    </div>
+                    <div class="time-slot available" onclick="selectTime('10:00-10:30', this)">
+                        <span>10:00-10:30</span>
+                        <span class="slot-status">可预约</span>
+                    </div>
+                    <div class="time-slot available" onclick="selectTime('10:30-11:00', this)">
+                        <span>10:30-11:00</span>
+                        <span class="slot-status">可预约</span>
+                    </div>
+                    <div class="time-slot unavailable">
+                        <span>14:00-14:30</span>
+                        <span class="slot-status">已满</span>
+                    </div>
+                    <div class="time-slot available" onclick="selectTime('14:30-15:00', this)">
+                        <span>14:30-15:00</span>
+                        <span class="slot-status">可预约</span>
+                    </div>
+                    <div class="time-slot available" onclick="selectTime('15:00-15:30', this)">
+                        <span>15:00-15:30</span>
+                        <span class="slot-status">可预约</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="showPage('confirm-page')" id="confirm-btn" disabled>
+                确认预约
+            </button>
+        </div>
+    </div>
+
+    <!-- 确认页面 -->
+    <div id="confirm-page" class="page">
+        <header class="page-header">
+            <button class="back-btn" onclick="showPage('time-page')">‹ 返回</button>
+            <h2>确认预约信息</h2>
+        </header>
+        
+        <div class="container">
+            <div class="confirm-card">
+                <div class="confirm-section">
+                    <h3>就诊信息</h3>
+                    <div class="info-row">
+                        <span class="info-label">科室：</span>
+                        <span class="info-value" id="confirm-dept">内科</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">医生：</span>
+                        <span class="info-value" id="confirm-doctor">张医生</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">就诊日期：</span>
+                        <span class="info-value" id="confirm-date">今天 12月15日</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">就诊时间：</span>
+                        <span class="info-value" id="confirm-time">08:00-08:30</span>
+                    </div>
+                </div>
+
+                <div class="confirm-section">
+                    <h3>患者信息</h3>
+                    <div class="info-row">
+                        <span class="info-label">姓名：</span>
+                        <span class="info-value">张三</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">身份证号：</span>
+                        <span class="info-value">320***********1234</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">联系电话：</span>
+                        <span class="info-value">138****5678</span>
+                    </div>
+                </div>
+
+                <div class="confirm-section">
+                    <h3>费用信息</h3>
+                    <div class="info-row">
+                        <span class="info-label">挂号费：</span>
+                        <span class="info-value price">¥50</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notice-box">
+                <h4>温馨提示</h4>
+                <ul>
+                    <li>请提前15分钟到达医院</li>
+                    <li>请携带身份证和医保卡</li>
+                    <li>如需取消预约，请提前24小时操作</li>
+                    <li>过号需重新排队</li>
+                </ul>
+            </div>
+
+            <button class="btn-primary" onclick="submitAppointment()">
+                确认并支付
+            </button>
+        </div>
+    </div>
+
+    <!-- 我的预约页面 -->
+    <div id="appointments-page" class="page">
+        <header class="page-header">
+            <button class="back-btn" onclick="showPage('home-page')">‹ 返回</button>
+            <h2>我的预约</h2>
+        </header>
+        
+        <div class="container">
+            <div class="appointment-tabs">
+                <button class="tab active" onclick="filterAppointments('upcoming')">待就诊</button>
+                <button class="tab" onclick="filterAppointments('completed')">已完成</button>
+                <button class="tab" onclick="filterAppointments('cancelled')">已取消</button>
+            </div>
+
+            <div class="appointment-list">
+                <div class="appointment-item">
+                    <div class="appointment-header">
+                        <span class="status-badge upcoming">待就诊</span>
+                        <span class="appointment-date">12月15日 08:00</span>
+                    </div>
+                    <div class="appointment-details">
+                        <h4>内科 - 张医生</h4>
+                        <p>就诊时间：08:00-08:30</p>
+                        <p>就诊地点：门诊楼3楼 301室</p>
+                    </div>
+                    <div class="appointment-actions">
+                        <button class="btn-secondary" onclick="cancelAppointment()">取消预约</button>
+                        <button class="btn-primary" onclick="viewDetails()">查看详情</button>
+                    </div>
+                </div>
+
+                <div class="appointment-item">
+                    <div class="appointment-header">
+                        <span class="status-badge upcoming">待就诊</span>
+                        <span class="appointment-date">12月18日 14:30</span>
+                    </div>
+                    <div class="appointment-details">
+                        <h4>外科 - 李医生</h4>
+                        <p>就诊时间：14:30-15:00</p>
+                        <p>就诊地点：门诊楼2楼 205室</p>
+                    </div>
+                    <div class="appointment-actions">
+                        <button class="btn-secondary" onclick="cancelAppointment()">取消预约</button>
+                        <button class="btn-primary" onclick="viewDetails()">查看详情</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 成功提示 -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="success-icon">✓</div>
+            <h2>预约成功！</h2>
+            <p>您的预约信息已确认，请按时就诊</p>
+            <button class="btn-primary" onclick="closeModal()">确定</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
